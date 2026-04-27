@@ -1,9 +1,12 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-@plugin "daisyui";
 
-@layer components{
-    .align-element{
+@plugin "daisyui" {
+    themes: winter --default, dracula --prefersdark;
+}
+
+@layer components {
+    .align-element {
         @apply max-w-6xl px-8 m-auto
     }
 }
