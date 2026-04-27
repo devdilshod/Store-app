@@ -5,7 +5,9 @@ const HomeLayout = () => {
     return <>
         <Header/>
         <Navbar/>
-        <Outlet />
+      <section className="align-element py-20">
+      <Outlet />
+      </section>
     </>
 }
 export default HomeLayout;
