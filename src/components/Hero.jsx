@@ -5,10 +5,10 @@ import hero2 from '../assets/hero2.webp';
 import hero3 from '../assets/hero3.webp';
 import hero4 from '../assets/hero4.webp';
 
-const carouselImages =[hero1,hero2,hero3,hero4]
+const carouselImages = [hero1, hero2, hero3, hero4]
 
 const Hero = () => {
-    return <>
+    return (
         <div className="grid lg:grid-cols-2 gap-24 items-center">
             <div>
                 <h1 className="text-4xl sm:text-6xl font-bold tracking-tight max-w-2xl">
@@ -17,25 +17,25 @@ const Hero = () => {
                 <p className="mt-8 max-w-xl text-lg leading-8">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                     Tempore repellat explicabo enim soluta temporibus asperiores
-                     aut obcaecati perferendis porro nobis.
+                    aut obcaecati perferendis porro nobis.
                 </p>
                 <div className="mt-10">
                     <Link to="products" className="btn btn-primary">
-                    OUR PRODUCTS
+                        OUR PRODUCTS
                     </Link>
                 </div>
-                
+
             </div>
             <div className="carousel carousel-center h-112 p-4 space-x-4 bg-neutral rounded-box">
-{
-    carouselImages.map((image)=> <div key={image}
-    className="carousel-item">
-<img src={image} className="h-full w-80 rounded-box object-cover"/>
-    </div>)
-}
+                {
+                    carouselImages.map((image) => <div key={image}
+                        className="carousel-item">
+                        <img src={image} className="h-full w-80 rounded-box object-cover" />
+                    </div>)
+                }
             </div>
         </div>
 
-    </>
+    )
 }
 export default Hero;

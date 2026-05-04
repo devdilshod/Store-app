@@ -15,7 +15,7 @@ const links = [
 const NavLinks = () => {
     return <>
         {
-            links.map((link) => <li>
+            links.map((link) => <li key={link.id}>
                 <NavLink to={link.url} className={({ isActive }) => isActive ? "bg-neutral text-neutral-50": ""}>
                     {link.text}
                 </NavLink>
