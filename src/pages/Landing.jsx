@@ -1,11 +1,11 @@
-import axios from "axios";
-import Hero from "../components/Hero";
-import { FeaturedProducts } from "../components";
+import { FeaturedProducts, Hero } from "../components";
+import { customFetch } from "../utils";
 
+const featuredProducts = "/products?featured=true"
 export const loader = async () => {
-   const response = await axios("https://strapi-store-server.onrender.com/api/products?featured=true");
+   const response = await customFetch(featuredProducts);
    const products = response.data.data;
-   return {products};
+   return { products };
 
 }
 
@@ -13,7 +13,7 @@ export const loader = async () => {
 const Landing = () => {
    return <>
       <Hero />
-      <FeaturedProducts/>
+      <FeaturedProducts />
    </>
 }
 
