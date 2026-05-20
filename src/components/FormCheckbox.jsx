@@ -1,6 +1,6 @@
 import React from "react";
 
-const FormCheckbox = ({ label, name, size }) => {
+const FormCheckbox = ({ label, name, size, defaultValue }) => {
     return (
         <div className="form-control flex flex-col gap-t-2 items-center">
             <label htmlFor={name} className="label">
@@ -11,6 +11,7 @@ const FormCheckbox = ({ label, name, size }) => {
                 name={name}
                 id={name}
                 className={`checkbox checkbox-primary ${size}`}
+                defaultChecked={defaultValue}
             />
         </div>
     )

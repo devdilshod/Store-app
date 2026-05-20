@@ -1,7 +1,6 @@
 import React from "react";
-import { ImTab } from "react-icons/im";
-//[all , apple,windows]
-const FormSelect = ({ label, name, list,size }) => {
+
+const FormSelect = ({ label, name, list,size,defaultValue }) => {
     return (
         <div className="form-control">
             <label htmlFor={name} className="label">
@@ -11,6 +10,7 @@ const FormSelect = ({ label, name, list,size }) => {
             className={`select select-bordered ${size}`}
                 name={name}
                 id={name}
+                defaultValue={defaultValue}
             >
                 {
                     list.map((item) => <option key={item} value={item}>
