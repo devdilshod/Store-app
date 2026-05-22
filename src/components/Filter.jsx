@@ -62,7 +62,7 @@ const Filter = () => {
                 className="btn btn-primary btn-sm uppercase"
             >
                 Search
-            </button>
+            </button> 
 
             <Link to="/products" className="btn btn-accent btn-sm uppercase">
                 Reset

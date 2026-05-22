@@ -4,7 +4,7 @@ import { formatPrice } from '../utils'
 const FormRange = ({ label, name, size, price }) => {
     const maxPrice = 100000;
     const step = 1000;
-    const [selectedPrice, setSelectedPrice] = useState(price||maxPrice);
+    const [selectedPrice, setSelectedPrice] = useState(price || maxPrice);
     return (
         <div className="form-control">
             <label htmlFor={name} className="label flex">
