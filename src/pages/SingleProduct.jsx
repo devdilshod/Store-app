@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { customFetch, formatPrice, generateAmountOptions } from "../utils";
+import { useDispatch } from "react-redux";
+import { addItem } from "../features/cart/cartSlice";
 
 export const loader = async ({ params }) => {
     const response = customFetch(`/products/${params.id}`);
@@ -10,8 +12,8 @@ export const loader = async ({ params }) => {
 }
 
 const SingleProduct = () => {
+    const dispatch = useDispatch();
     const { product } = useLoaderData();
-
     const { title, image, company, price, description, colors } = product.attributes;
     const dollarsAmount = formatPrice(price);
     const [productColor, setProductColor] = useState(colors[0]);
@@ -20,7 +22,20 @@ const SingleProduct = () => {
         setAmount(parseInt(e.target.value));
     }
 
-   
+    const addToCart = () => {
+        const cartProduct = {
+            cartID: product.id + productColor,
+            productID: product.id,
+            title,
+            image,
+            company,
+            amount,
+            productColor,
+            price
+        };
+        dispatch(addItem({ product: cartProduct }));
+    }
+
 
     return <section>
         <div className=" text-md breadcrumbs">
@@ -72,13 +87,16 @@ const SingleProduct = () => {
                         onChange={handleAmount}
                         id="amount"
                         className="mt-2 select select-secondary select-bordered select-md">
-                       {
-                        generateAmountOptions(10)
-                       }
+                        {
+                            generateAmountOptions(10)
+                        }
                     </select>
                 </div>
                 <div className="mt-10">
-                    <button className="btn btn-secondary btn-md">
+                    <button
+                        onClick={addToCart}
+                        className="btn btn-secondary btn-md"
+                    >
                         ADD TO BAG
                     </button>
                 </div>

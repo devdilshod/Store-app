@@ -3,6 +3,7 @@ import { FaBarsStaggered } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
 import NavLinks from "./Navlinks";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const themes = {
     winter: "winter",
@@ -11,17 +12,19 @@ const themes = {
 const getThemeFromLocalStorage = () => localStorage.getItem("theme") || themes.winter;
 
 const Navbar = () => {
-  const [theme, setTheme] = useState(getThemeFromLocalStorage());
+    const numItemsInCart = useSelector((state) => state.cartState.numItemsInCart);
 
-  const changeTheme = () => {
-    let newTheme = theme === themes.winter ? themes.dracula : themes.winter;
-    setTheme(newTheme);
-  };
+    const [theme, setTheme] = useState(getThemeFromLocalStorage());
 
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+    const changeTheme = () => {
+        let newTheme = theme === themes.winter ? themes.dracula : themes.winter;
+        setTheme(newTheme);
+    };
+
+    useEffect(() => {
+        document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", theme);
+    }, [theme]);
 
     return <>
         <nav className="bg-base-200">
@@ -55,7 +58,7 @@ const Navbar = () => {
                     <NavLink to="/cart" className="btn btn-ghost btn-circle btn-md ml-4">
                         <div className="indicator">
                             <BsCart3 className="w-6 h-6" />
-                            <span className="indicator-item badge badge-primary badge-sm">9</span>
+                            <span className="indicator-item badge badge-primary badge-sm">{numItemsInCart}</span>
                         </div>
                     </NavLink>
                 </div>
