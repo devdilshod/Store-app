@@ -20,9 +20,7 @@ const cartSlice = createSlice({
     reducers: {
         addItem: (state, action) => {
             const product = action.payload.product;
-
             const item = state.cartItems.find((cartItem) => cartItem.cartID == action.payload.product.cartID);
-
             if (item) {
                 item.amount += product.amount;
             } else {
@@ -32,11 +30,10 @@ const cartSlice = createSlice({
             state.numItemsInCart += product.amount;
             state.cartTotal += product.amount * product.price;
             cartSlice.caseReducers.calculateTotals(state);
-
-
             toast.success("Item added to cart");
         },
-        removeItem: (state, action) => {
+        removeItem: (state, action) => { 
+            
             const { cartID } = action.payload;
             const product = state.cartItems.find((item) => item.cartID === cartID);
             state.cartItems = state.cartItems.filter((item) => item.cartID != cartID);
