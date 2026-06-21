@@ -1,9 +1,28 @@
-import { Form, Link } from "react-router-dom";
+import { Form, Link, redirect } from "react-router-dom";
 import { FormInput, SubmitBtn } from "../components";
+import { customFetch } from "../utils";
+import { loginUser } from "../features/user/userSlice";
+import { toast } from "react-toastify";
+
+export const action = (store) => async ({ request }) => {
+    const formData = request.formData();
+    const data = Object.fromEntries(formData);
+
+    try {
+        const response = await customFetch.post("/auth/local", data);
+        store.dispatch(loginUser(response.data));
+        toast.success("logged in successfully");
+        redirect("/")
+    } catch (error) {
+        const errorMessage = error?.response?.data?.error?.message || "please double check your credentials";
+        toast.error(errorMessage);
+        return null;
+    }
+}
 
 const Login = () => {
     return <section className="h-screen grid place-items-center">
-        <Form className="card flex flex-col w-96 p-8 bg-base-100 shadow-lg gap-y-4">
+        <Form  method="POST" className="card flex flex-col w-96 p-8 bg-base-100 shadow-lg gap-y-4">
             <h4 className="text-3xl text-center font-bold">
                 Login
             </h4>
@@ -33,7 +52,7 @@ const Login = () => {
             </p>
 
         </Form>
-    </section> 
+    </section>
 }
 
 export default Login;

@@ -15,9 +15,7 @@ const getThemeFromLocalStrorage = () => {
 }
 
 const initialState = {
-    user: {
-        username: "tom"
-    },
+    user: null, 
     theme: getThemeFromLocalStrorage()
 }
 
