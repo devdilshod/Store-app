@@ -5,14 +5,14 @@ import { loginUser } from "../features/user/userSlice";
 import { toast } from "react-toastify";
 
 export const action = (store) => async ({ request }) => {
-    const formData = request.formData();
+    const formData = await request.formData();
     const data = Object.fromEntries(formData);
 
     try {
         const response = await customFetch.post("/auth/local", data);
         store.dispatch(loginUser(response.data));
         toast.success("logged in successfully");
-        redirect("/")
+        return redirect("/");
     } catch (error) {
         const errorMessage = error?.response?.data?.error?.message || "please double check your credentials";
         toast.error(errorMessage);
