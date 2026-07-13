@@ -6,8 +6,6 @@ import FormCheckbox from "./FormCheckbox";
 
 const Filter = () => {
     const { meta, params} = useLoaderData();
-    console.log(params);
-    
 
     return (
         <Form className="bg-base-200 rounded-lg px-8 py-4 grid gap-x-4 gap-y-8 sm:grid-cols-2

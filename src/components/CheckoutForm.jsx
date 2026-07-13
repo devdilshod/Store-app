@@ -1,5 +1,5 @@
 import React from "react"
-import { Form ,redirect } from "react-router-dom"
+import { Form, redirect } from "react-router-dom"
 import FormInput from "./FormInput"
 import SubmitBtn from "./SubmitBtn"
 import { customFetch, formatPrice } from "../utils";
@@ -22,15 +22,15 @@ export const action = (store) => async ({ request }) => {
     }
 
     try {
-        const response = customFetch.post(
+        const response = await customFetch.post(
             "/orders",
             { data: info },
             {
                 headers: {
-                    Authorization: `Bearer ${user.token}`
+                    Authorization: `Bearer ${user?.token}`
                 }
             }
-        
+
         );
         store.dispatch(clearCart());
         toast.success("order placed successfully");
@@ -38,6 +38,9 @@ export const action = (store) => async ({ request }) => {
     } catch (error) {
         const errorMessage = error?.response?.data?.error?.message || "there was an error placing your order";
         toast.error(errorMessage);
+        if (error?.response?.status === 401 || 403) {
+            return redirect("/login");
+        }
         return null;
     }
 

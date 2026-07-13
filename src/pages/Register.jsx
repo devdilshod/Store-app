@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 export const action = async ({ request }) => {
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
-    console.log(data);
 
     try {
         const response = await customFetch.post("/auth/local/register", data);
