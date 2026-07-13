@@ -36,7 +36,7 @@ export const action = (store) => async ({ request }) => {
         toast.success("order placed successfully");
         return redirect("/orders");
     } catch (error) {
-        const errorMessage = error?.response?.data?.error?.message || "please double check your credentials";
+        const errorMessage = error?.response?.data?.error?.message || "there was an error placing your order";
         toast.error(errorMessage);
         return null;
     }
